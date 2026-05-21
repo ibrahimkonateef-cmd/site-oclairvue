@@ -1,8 +1,8 @@
 // ─── CONFIGURATION EMAILJS ───────────────────────────────────────────────────
 // Remplacez ces 3 valeurs après avoir créé votre compte sur emailjs.com
-const EMAILJS_PUBLIC_KEY  = "VOTRE_PUBLIC_KEY";   // Onglet Account > Public Key
-const EMAILJS_SERVICE_ID  = "VOTRE_SERVICE_ID";   // Onglet Email Services > Service ID
-const EMAILJS_TEMPLATE_ID = "VOTRE_TEMPLATE_ID";  // Onglet Email Templates > Template ID
+const EMAILJS_PUBLIC_KEY  = "T8Ih9Y2Jyd3yX415T";   // Onglet Account > Public Key
+const EMAILJS_SERVICE_ID  = "service_7s591nk";   // Onglet Email Services > Service ID
+const EMAILJS_TEMPLATE_ID = "template_2navahk";  // Onglet Email Templates > Template ID
 // ─────────────────────────────────────────────────────────────────────────────
 
 emailjs.init(EMAILJS_PUBLIC_KEY);
