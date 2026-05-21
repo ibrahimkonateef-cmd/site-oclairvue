@@ -1,23 +1,50 @@
 // ─── CONFIGURATION EMAILJS ───────────────────────────────────────────────────
-// Remplacez ces 3 valeurs après avoir créé votre compte sur emailjs.com
-const EMAILJS_PUBLIC_KEY  = "T8Ih9Y2Jyd3yX415T";   // Onglet Account > Public Key
-const EMAILJS_SERVICE_ID  = "service_7s591nk";   // Onglet Email Services > Service ID
-const EMAILJS_TEMPLATE_ID = "template_2navahk";  // Onglet Email Templates > Template ID
+const EMAILJS_PUBLIC_KEY  = "T8Ih9Y2Jyd3yX415T";
+const EMAILJS_SERVICE_ID  = "service_7s591nk";
+const EMAILJS_TEMPLATE_ID = "template_2navahk";
+
+// ─── CONFIGURATION SUPABASE ──────────────────────────────────────────────────
+// Project Settings > API  →  Project URL  +  anon public key
+const SUPABASE_URL      = "VOTRE_SUPABASE_URL";   // ex: https://xxxx.supabase.co
+const SUPABASE_ANON_KEY = "VOTRE_ANON_KEY";        // clé "anon public"
 // ─────────────────────────────────────────────────────────────────────────────
 
 emailjs.init(EMAILJS_PUBLIC_KEY);
 
-// Date minimum = aujourd'hui (pas de rendez-vous dans le passé)
+// Date minimum = aujourd'hui
 const dateInput = document.querySelector('input[name="date"]');
 if (dateInput) {
-  const today = new Date().toISOString().split('T')[0];
-  dateInput.setAttribute('min', today);
+  dateInput.setAttribute('min', new Date().toISOString().split('T')[0]);
+}
+
+// Sauvegarde du rendez-vous dans Supabase
+async function sauvegarderRendezVous(data) {
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/rendez_vous`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'apikey': SUPABASE_ANON_KEY,
+      'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+      'Prefer': 'return=minimal'
+    },
+    body: JSON.stringify({
+      nom:      data.nom,
+      telephone:data.telephone,
+      email:    data.email,
+      service:  data.service,
+      date_rdv: data.date,
+      creneau:  data.creneau,
+      message:  data.message,
+      statut:   'En attente'
+    })
+  });
+  if (!res.ok) throw new Error(await res.text());
 }
 
 // Gestion du formulaire de rendez-vous
 const form = document.getElementById('rdv-form');
 if (form) {
-  form.addEventListener('submit', function (e) {
+  form.addEventListener('submit', async function (e) {
     e.preventDefault();
 
     const btnText    = document.getElementById('btn-text');
@@ -26,30 +53,39 @@ if (form) {
     const success    = document.getElementById('form-success');
     const error      = document.getElementById('form-error');
 
-    // État chargement
     btnText.style.display    = 'none';
     btnLoading.style.display = 'inline';
     btnSubmit.disabled       = true;
     success.style.display    = 'none';
     error.style.display      = 'none';
 
-    emailjs.sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, form)
-      .then(() => {
-        success.style.display = 'block';
-        form.reset();
-        // Réinitialiser la date min après reset
-        if (dateInput) {
-          dateInput.setAttribute('min', new Date().toISOString().split('T')[0]);
-        }
-      })
-      .catch(() => {
-        error.style.display = 'block';
-      })
-      .finally(() => {
-        btnText.style.display    = 'inline';
-        btnLoading.style.display = 'none';
-        btnSubmit.disabled       = false;
-      });
+    const data = {
+      nom:      form.querySelector('[name="nom"]').value,
+      telephone:form.querySelector('[name="telephone"]').value,
+      email:    form.querySelector('[name="email"]').value,
+      service:  form.querySelector('[name="service"]').value,
+      date:     form.querySelector('[name="date"]').value,
+      creneau:  form.querySelector('[name="creneau"]').value,
+      message:  form.querySelector('[name="message"]').value,
+    };
+
+    try {
+      // Sauvegarde BDD + email en parallèle
+      await Promise.all([
+        sauvegarderRendezVous(data),
+        emailjs.sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, form)
+      ]);
+      success.style.display = 'block';
+      form.reset();
+      if (dateInput) dateInput.setAttribute('min', new Date().toISOString().split('T')[0]);
+    } catch (err) {
+      console.error(err);
+      error.style.display = 'block';
+    } finally {
+      btnText.style.display    = 'inline';
+      btnLoading.style.display = 'none';
+      btnSubmit.disabled       = false;
+    }
   });
 }
 
