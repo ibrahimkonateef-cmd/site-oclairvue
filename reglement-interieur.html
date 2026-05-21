@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Règlement Intérieur – O'ClairVue SARL</title>
+  <style>
+    :root {
+      --primary: #006f8e;
+      --primary-dark: #004f66;
+      --accent: #00bcd4;
+      --bg: #f5f7fa;
+      --white: #ffffff;
+      --text: #2d3748;
+      --muted: #718096;
+      --border: #e2e8f0;
+      --sidebar-width: 270px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    /* ─── TOP BAR ─── */
+    .topbar {
+      background: var(--primary-dark);
+      color: white;
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+    .topbar-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    .topbar-logo span { font-size: 1.5rem; }
+    .topbar-meta { font-size: 0.8rem; opacity: 0.8; }
+    .btn-print {
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+    .btn-print:hover { background: #0097a7; }
+
+    /* ─── LAYOUT ─── */
+    .layout {
+      display: flex;
+      min-height: calc(100vh - 54px);
+    }
+
+    /* ─── SIDEBAR ─── */
+    .sidebar {
+      width: var(--sidebar-width);
+      background: var(--white);
+      border-right: 1px solid var(--border);
+      padding: 24px 0;
+      position: sticky;
+      top: 54px;
+      height: calc(100vh - 54px);
+      overflow-y: auto;
+      flex-shrink: 0;
+    }
+    .sidebar h3 {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--muted);
+      padding: 0 20px 12px;
+    }
+    .sidebar ul { list-style: none; }
+    .sidebar ul li a {
+      display: block;
+      padding: 9px 20px;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.85rem;
+      border-left: 3px solid transparent;
+      transition: all 0.2s;
+    }
+    .sidebar ul li a:hover,
+    .sidebar ul li a.active {
+      background: #e6f7fa;
+      color: var(--primary);
+      border-left-color: var(--accent);
+      font-weight: 600;
+    }
+    .sidebar .chapter-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      padding: 14px 20px 4px;
+    }
+
+    /* ─── MAIN CONTENT ─── */
+    .main {
+      flex: 1;
+      padding: 40px 48px;
+      max-width: 860px;
+    }
+
+    /* Cover */
+    .cover {
+      text-align: center;
+      background: var(--white);
+      border-radius: 12px;
+      padding: 48px 40px;
+      margin-bottom: 40px;
+      border: 1px solid var(--border);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+    .cover .logo-badge {
+      width: 72px;
+      height: 72px;
+      background: var(--primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      margin: 0 auto 20px;
+    }
+    .cover h1 {
+      font-size: 1.8rem;
+      color: var(--primary-dark);
+      margin-bottom: 6px;
+    }
+    .cover .subtitle {
+      font-size: 1rem;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+    .cover .meta-grid {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      flex-wrap: wrap;
+      margin-top: 24px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+    }
+    .cover .meta-item { text-align: center; }
+    .cover .meta-item .label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--muted);
+    }
+    .cover .meta-item .value {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .badge-version {
+      display: inline-block;
+      background: var(--accent);
+      color: white;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 16px;
+    }
+
+    /* Sections */
+    .section {
+      background: var(--white);
+      border-radius: 10px;
+      padding: 36px 40px;
+      margin-bottom: 24px;
+      border: 1px solid var(--border);
+      box-shadow: 0 1px 6px rgba(0,0,0,0.04);
+      scroll-margin-top: 70px;
+    }
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 2px solid var(--border);
+    }
+    .chapter-num {
+      background: var(--primary);
+      color: white;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+    .section h2 {
+      font-size: 1.15rem;
+      color: var(--primary-dark);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Articles */
+    .article {
+      margin-bottom: 28px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid var(--border);
+    }
+    .article:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .article h3 {
+      font-size: 0.95rem;
+      color: var(--primary);
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+    .article p { font-size: 0.92rem; margin-bottom: 10px; }
+    .article p:last-child { margin-bottom: 0; }
+    .article ul {
+      padding-left: 20px;
+      margin: 8px 0;
+    }
+    .article ul li {
+      font-size: 0.92rem;
+      margin-bottom: 5px;
+    }
+
+    /* Sanction scale */
+    .sanction-list {
+      list-style: none;
+      padding: 0;
+      margin: 10px 0;
+    }
+    .sanction-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 10px 14px;
+      border-radius: 6px;
+      margin-bottom: 6px;
+      font-size: 0.9rem;
+    }
+    .sanction-list li:nth-child(1) { background: #e8f5e9; }
+    .sanction-list li:nth-child(2) { background: #fff8e1; }
+    .sanction-list li:nth-child(3) { background: #fff3e0; }
+    .sanction-list li:nth-child(4) { background: #fbe9e7; }
+    .sanction-list li:nth-child(5) { background: #fce4ec; }
+    .sanction-num {
+      font-weight: 800;
+      font-size: 0.85rem;
+      min-width: 20px;
+      color: var(--primary-dark);
+    }
+
+    /* Preambule */
+    .preambule {
+      background: #e6f7fa;
+      border-left: 4px solid var(--accent);
+      border-radius: 0 8px 8px 0;
+      padding: 20px 24px;
+      margin-bottom: 28px;
+      font-size: 0.92rem;
+    }
+    .preambule strong { color: var(--primary-dark); }
+
+    /* Horaires */
+    .horaire-grid {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin: 10px 0;
+    }
+    .horaire-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 16px;
+      text-align: center;
+      flex: 1;
+      min-width: 120px;
+    }
+    .horaire-card .h-label { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; }
+    .horaire-card .h-time { font-size: 1.1rem; font-weight: 700; color: var(--primary); }
+
+    /* Signature block */
+    .signature-block {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 28px;
+      margin-top: 24px;
+    }
+    .signature-block h3 {
+      font-size: 0.85rem;
+      color: var(--primary-dark);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+    }
+    .sig-row {
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    .sig-col {
+      flex: 1;
+      min-width: 180px;
+    }
+    .sig-col .sig-name { font-weight: 700; font-size: 0.9rem; }
+    .sig-col .sig-title { font-size: 0.8rem; color: var(--muted); margin-bottom: 40px; }
+    .sig-line { border-top: 1px solid var(--text); margin-top: 8px; padding-top: 6px; font-size: 0.75rem; color: var(--muted); }
+
+    /* Accusé de réception */
+    .accuse {
+      border: 2px dashed var(--border);
+      border-radius: 10px;
+      padding: 28px;
+      margin-top: 24px;
+    }
+    .accuse h3 {
+      color: var(--primary-dark);
+      margin-bottom: 16px;
+      font-size: 1rem;
+    }
+    .form-field {
+      border-bottom: 1px solid var(--text);
+      margin: 16px 0;
+      padding-bottom: 2px;
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 32px;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    /* Print styles */
+    @media print {
+      .topbar, .sidebar, .btn-print { display: none !important; }
+      .main { padding: 20px; max-width: 100%; }
+      .section { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
+      .layout { display: block; }
+    }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+      .sidebar { display: none; }
+      .main { padding: 20px 16px; }
+      .section { padding: 24px 20px; }
+      .cover { padding: 32px 20px; }
+      .topbar-meta { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-logo">
+    <span>👓</span>
+    O'ClairVue SARL
+    <span style="font-weight:300; opacity:0.6; font-size:0.85rem;">— Règlement Intérieur</span>
+  </div>
+  <div class="topbar-meta">RCCM : MA.BKO.2025.B.9080 · Kalaban Coura, Bamako, Mali</div>
+  <button class="btn-print" onclick="window.print()">🖨️ Imprimer</button>
+</div>
+
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <nav class="sidebar">
+    <h3>Navigation</h3>
+    <ul>
+      <li><a href="#couverture">Couverture &amp; Préambule</a></li>
+      <li class="chapter-label">Chapitres</li>
+      <li><a href="#ch1">I – Dispositions Générales</a></li>
+      <li><a href="#ch2">II – Organisation du Travail</a></li>
+      <li><a href="#ch3">III – Obligations Professionnelles</a></li>
+      <li><a href="#ch4">IV – Hygiène &amp; Sécurité</a></li>
+      <li><a href="#ch5">V – Discipline &amp; Sanctions</a></li>
+      <li><a href="#ch6">VI – Droits des Employés</a></li>
+      <li><a href="#ch7">VII – Cessation du Contrat</a></li>
+      <li><a href="#ch8">VIII – Dispositions Finales</a></li>
+      <li><a href="#signatures">Signatures &amp; Accusé</a></li>
+    </ul>
+  </nav>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <!-- COVER -->
+    <div class="cover" id="couverture">
+      <div class="logo-badge">👓</div>
+      <div class="badge-version">Version 1.0 – Avril 2026</div>
+      <h1>O'CLAIRVUE SARL</h1>
+      <div class="subtitle">Secteur d'activité : Optique / Lunetterie</div>
+      <h2 style="font-size:1.3rem; color:#006f8e; margin-bottom: 8px;">RÈGLEMENT INTÉRIEUR</h2>
+      <p style="color:#718096; font-size:0.88rem;">Établi conformément au Code du Travail de la République du Mali<br>et de la Convention Collective Fédérale du Commerce.</p>
+      <div class="meta-grid">
+        <div class="meta-item">
+          <div class="label">Siège social</div>
+          <div class="value">Kalaban Coura, Bamako, Mali</div>
+        </div>
+        <div class="meta-item">
+          <div class="label">RCCM</div>
+          <div class="value">MA.BKO.2025.B.9080</div>
+        </div>
+        <div class="meta-item">
+          <div class="label">Rédigé par</div>
+          <div class="value">M. Ibrahim KONATE, Associé</div>
+        </div>
+        <div class="meta-item">
+          <div class="label">Approuvé par</div>
+          <div class="value">Mme Fatoumata HAIDARA, Gérante</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRÉAMBULE -->
+    <div class="section" style="padding-top: 28px; padding-bottom: 28px;">
+      <h3 style="color:var(--primary-dark); text-transform:uppercase; letter-spacing:1px; font-size:0.9rem; margin-bottom:14px;">Préambule</h3>
+      <div class="preambule">
+        Le présent Règlement Intérieur est établi conformément aux dispositions du <strong>Code du Travail de la République du Mali</strong> et de la <strong>Convention Collective Fédérale du Commerce</strong>. Il s'applique à l'ensemble du personnel de la société O'ClairVue SARL, entreprise spécialisée dans l'optique et la lunetterie, dont le siège social est situé à Kalaban Coura, Bamako, immatriculée sous le numéro RCCM MA.BKO.2025.B.9080.
+      </div>
+      <p style="font-size:0.92rem;">Ce Règlement Intérieur a pour objet de définir les règles relatives à la discipline, à l'hygiène, à la sécurité ainsi qu'aux droits et obligations réciproques de l'employeur et des employés. Il constitue un document contractuel opposable à tous les membres du personnel dès sa remise et sa signature.</p>
+      <p style="font-size:0.92rem; margin-top:10px;"><strong>Tout employé est tenu de le lire, de le respecter et d'en accuser réception par écrit lors de sa prise de fonction.</strong></p>
+    </div>
+
+    <!-- CHAPITRE I -->
+    <div class="section" id="ch1">
+      <div class="section-header">
+        <span class="chapter-num">Chapitre I</span>
+        <h2>Dispositions Générales</h2>
+      </div>
+
+      <div class="article">
+        <h3>Article 1 – Champ d'application</h3>
+        <p>Le présent Règlement Intérieur s'applique à l'ensemble des salariés de O'ClairVue SARL, quelle que soit la nature de leur contrat (CDI, CDD, période d'essai), ainsi qu'aux stagiaires et prestataires travaillant dans les locaux de la société.</p>
+      </div>
+
+      <div class="article">
+        <h3>Article 2 – Affichage et remise</h3>
+        <p>Conformément à la réglementation en vigueur au Mali, le présent Règlement Intérieur est :</p>
+        <ul>
+          <li>Affiché dans les locaux de la société à un endroit accessible à tous les salariés ;</li>
+          <li>Remis en main propre à chaque salarié lors de son embauche, contre émargement ;</li>
+          <li>Transmis à la Direction Nationale du Travail pour visa.</li>
+        </ul>
+      </div>
+
+      <div class="article">
+        <h3>Article 3 – Modification</h3>
+        <p>Toute modification du présent Règlement Intérieur sera portée à la connaissance des salariés dans les mêmes formes que son établissement initial et soumise aux formalités légales en vigueur.</p>
+      </div>
+    </div>
+
+    <!-- CHAPITRE II -->
+    <div class="section" id="ch2">
+      <div class="section-header">
+        <span class="chapter-num">Chapitre II</span>
+        <h2>Organisation du Travail</h2>
+      </div>
+
+      <div class="article">
+        <h3>Article 4 – Horaires de travail</h3>
+        <p>Le cabinet est ouvert du <strong>lundi au samedi</strong>. La durée légale du travail est fixée à <strong>40 heures par semaine</strong>, conformément au Code du Travail malien.</p>
+        <div class="horaire-grid">
+          <div class="horaire-card">
+            <div class="h-label">Ouverture personnel</div>
+            <div class="h-time">08h00</div>
+          </div>
+          <div class="horaire-card">
+            <div class="h-label">Fermeture personnel</div>
+            <div class="h-time">17h00</div>
+          </div>
+          <div class="horaire-card">
+            <div class="h-label">Direction (clôture)</div>
+            <div class="h-time">19h00</div>
+          </div>
+        </div>
+        <p style="margin-top:14px;"><strong>Pauses déjeuner par roulement :</strong></p>
+        <ul>
+          <li>Groupe A : 12h00 – 13h00</li>
+          <li>Groupe B : 13h00 – 14h00</li>
+        </ul>
+        <p style="margin-top:10px;">En plus du dimanche, chaque employé bénéficie d'un <strong>jour de repos fixe en semaine</strong>, attribué de manière à garantir une équipe minimale présente chaque jour.</p>
+      </div>
+
+      <div class="article">
+        <h3>Article 5 – Pointage et contrôle des présences</h3>
+        <p>Chaque employé est tenu de signaler son arrivée et son départ selon les modalités définies par la Direction. Toute absence non justifiée dans les <strong>24 heures</strong> sera considérée comme une faute.</p>
+      </div>
+
+      <div class="article">
+        <h3>Article 6 – Retards et absences</h3>
+        <ul>
+          <li><strong>Retards :</strong> Tout retard doit être signalé à la hiérarchie. Des retards répétés et non justifiés constituent une faute pouvant donner lieu à une sanction disciplinaire.</li>
+          <li><strong>Absences prévisibles :</strong> À signaler au moins <strong>48 heures à l'avance</strong>, avec demande écrite approuvée par la Direction.</li>
+          <li><strong>Absences imprévisibles :</strong> Prévenir la Direction dans les meilleurs délais et fournir un justificatif dans les <strong>48 heures</strong> suivant le retour au travail.</li>
+        </ul>
+      </div>
+
+      <div class="article">
+        <h3>Article 7 – Heures supplémentaires</h3>
+        <p>Les heures supplémentaires (au-delà de 40h/semaine) ne peuvent être effectuées qu'à la demande expresse de la Direction et sont compensées conformément aux dispositions légales en vigueur au Mali.</p>
+      </div>
+
+      <div class="article">
+        <h3>Article 8 – Congés payés</h3>
+        <p>Tout employé a droit à <strong>2,5 jours ouvrables de congé par mois</strong> de travail effectif, soit <strong>30 jours par an</strong>. Toute demande de congé doit être formulée par écrit et approuvée par la Direction au moins <strong>deux (2) semaines à l'avance</strong>.</p>
+      </div>
+
+      <div class="article">
+        <h3>Article 9 – Jours fériés</h3>
+        <p>Les jours fériés légaux au Mali sont chômés et payés. En cas de nécessité de service, un employé peut être amené à travailler un jour férié, avec compensation selon la loi.</p>
+      </div>
+    </div>
+
+    <!-- CHAPITRE III -->
+    <div class="section" id="ch3">
+      <div class="section-header">
+        <span class="chapter-num">Chapitre III</span>
+        <h2>Obligations Professionnelles</h2>
+      </div>
+
+      <div class="article">
+        <h3>Article 10 – Comportement général</h3>
+        <p>Chaque employé est tenu d'adopter un comportement professionnel, respectueux et courtois. Les comportements suivants sont exigés :</p>
+        <ul>
+          <li>Ponctualité et assiduité au travail ;</li>
+          <li>Respect de la hiérarchie et des collègues ;</li>
+          <li>Courtoisie et professionnalisme envers la clientèle ;</li>
+          <li>Tenue vestimentaire correcte et soignée, représentative de l'image de l'entreprise ;</li>
+          <li>Discrétion concernant les informations confidentielles de l'entreprise et de ses clients.</li>
+        </ul>
+      </div>
+
+      <div class="article">
+        <h3>Article 11 – Exclusivité et loyauté</h3>
+        <p>Chaque employé consacre l'exclusivité de son activité professionnelle à O'ClairVue SARL. Il lui est interdit d'exercer, même en dehors des heures de travail, toute activité susceptible de concurrencer l'entreprise, sans autorisation préalable écrite de la Direction.</p>
+      </div>
+
+      <div class="article">
+        <h3>Article 12 – Confidentialité</h3>
+        <p>Les employés sont tenus à une obligation stricte de confidentialité concernant :</p>
+        <ul>
+          <li>Les informations techniques, commerciales et financières de la société ;</li>
+          <li>Les données personnelles des clients et partenaires ;</li>
+          <li>Les méthodes de travail, processus et savoir-faire de l'entreprise ;</li>
+          <li>Toute information dont ils auraient connaissance dans l'exercice de leurs fonctions.</li>
+        </ul>
+        <p>Cette obligation s'applique <strong>pendant et après</strong> la cessation des fonctions.</p>
+      </div>
+
+      <div class="article">
+        <h3>Article 13 – Utilisation des équipements et matériels</h3>
+        <p>Les équipements mis à disposition sont strictement réservés à un usage professionnel. L'employé est responsable de leur bonne conservation. Tout dommage résultant d'une faute ou d'une négligence pourra entraîner une mise en cause de la responsabilité du salarié.</p>
+      </div>
+
+      <div class="article">
+        <h3>Article 14 – Utilisation des outils numériques</h3>
+        <p>Il est notamment interdit de :</p>
+        <ul>
+          <li>Divulguer des informations confidentielles sur les réseaux sociaux ;</li>
+          <li>Utiliser les outils de l'entreprise pour des activités personnelles de manière excessive ;</li>
+          <li>Télécharger ou installer des logiciels non autorisés.</li>
+        </ul>
+      </div>
+
+      <div class="article">
+        <h3>Article 15 – Tenue et présentation en magasin</h3>
+        <p>Tous les employés en contact avec le public sont tenus de :</p>
+        <ul>
+          <li>Porter une tenue propre, soignée et professionnelle ;</li>
+          <li>Maintenir un espace de travail propre et organisé ;</li>
+          <li>Veiller à la présentation des produits et vitrines selon les standards de l'enseigne ;</li>
+          <li>Adopter un langage approprié et un service client irréprochable.</li>
+        </ul>
+        <p style="background:#e6f7fa; border-left:3px solid var(--accent); padding:10px 14px; border-radius:0 6px 6px 0; margin-top:12px; font-size:0.88rem;">
+          <strong>Tenue obligatoire :</strong> Polo blanc avec logo ou T-shirt commercial + pantalon classique propre et repassé (Beige ou Noir) + chaussures fermées et entretenues.<br>
+          <em>"Votre vue, notre priorité"</em> doit se refléter dans l'accueil à tout moment.
+        </p>
+      </div>
+    </div>
+
+    <!-- CHAPITRE IV -->
+    <div class="section" id="ch4">
+      <div class="section-header">
+        <span class="chapter-num">Chapitre IV</span>
+        <h2>Hygiène &amp; Sécurité</h2>
+      </div>
+
+      <div class="article">
+        <h3>Article 16 – Règles d'hygiène</h3>
+        <ul>
+          <li>Maintenir son poste de travail propre et rangé ;</li>
+          <li>Respecter les espaces communs (salle de pause, sanitaires, etc.) ;</li>
+          <li>Ne pas consommer de nourriture dans l'espace de vente ou de réception des clients ;</li>
+          <li>Jeter les déchets dans les poubelles prévues à cet effet.</li>
+        </ul>
+      </div>
+
+      <div class="article">
+        <h3>Article 17 – Sécurité des locaux</h3>
+        <ul>
+          <li>Veiller à fermer correctement les locaux en quittant les lieux en dernier ;</li>
+          <li>Signaler immédiatement à la Direction tout incident, accident ou anomalie ;</li>
+          <li>Ne pas introduire de personnes non autorisées dans les locaux.</li>
+        </ul>
+      </div>
+
+      <div class="article">
+        <h3>Article 18 – Interdictions</h3>
+        <p>Il est formellement interdit dans les locaux de O'ClairVue SARL :</p>
+        <ul>
+          <li>De fumer ou de consommer de l'alcool ou toute substance illicite ;</li>
+          <li>D'introduire des armes, quelle qu'en soit la nature ;</li>
+          <li>De se livrer à des jeux de hasard ou à toute activité étrangère au travail ;</li>
+          <li>De tenir des réunions politiques, syndicales ou religieuses sans autorisation préalable.</li>
+        </ul>
+      </div>
+
+      <div class="article">
+        <h3>Article 19 – Accidents du travail</h3>
+        <p>Tout accident survenu dans le cadre du travail doit être déclaré immédiatement à la Direction. Les déclarations sont effectuées conformément aux dispositions légales maliennes et auprès de l'<strong>INPS</strong>.</p>
+      </div>
+    </div>
+
+    <!-- CHAPITRE V -->
+    <div class="section" id="ch5">
+      <div class="section-header">
+        <span class="chapter-num">Chapitre V</span>
+        <h2>Discipline &amp; Sanctions</h2>
+      </div>
+
+      <div class="article">
+        <h3>Article 20 – Discipline générale</h3>
+        <ul>
+          <li><strong>Téléphones personnels :</strong> Usage strictement interdit en présence des clients. Mis sur silencieux et rangés.</li>
+          <li><strong>Réseaux sociaux :</strong> L'utilisation pour le contenu professionnel du cabinet (TikTok, photos) est soumise à l'accord préalable de la Direction.</li>
+          <li><strong>Responsabilité :</strong> Chaque collaborateur est responsable du matériel technique et des montures qu'il manipule. Toute vente doit être saisie immédiatement dans le système.</li>
+          <li><strong>Fin de service (17h00) :</strong> Postes rangés, matériel éteint, dossiers du jour transmis à la Direction avant départ.</li>
+        </ul>
+      </div>
+
+      <div class="article">
+        <h3>Article 21 – Principe général</h3>
+        <p>Tout manquement aux obligations définies par le présent Règlement peut donner lieu à une sanction disciplinaire. L'employé sera préalablement convoqué pour s'expliquer sur les faits qui lui sont reprochés.</p>
+      </div>
+
+      <div class="article">
+        <h3>Article 22 – Échelle des sanctions</h3>
+        <ul class="sanction-list">
+          <li><span class="sanction-num">1.</span><span><strong>Avertissement écrit</strong> – pour tout manquement mineur aux règles de travail ou de comportement.</span></li>
+          <li><span class="sanction-num">2.</span><span><strong>Blâme</strong> – pour récidive ou manquement plus sérieux.</span></li>
+          <li><span class="sanction-num">3.</span><span><strong>Mise à pied temporaire sans solde</strong> – de 1 à 5 jours, pour faute grave.</span></li>
+          <li><span class="sanction-num">4.</span><span><strong>Licenciement pour faute grave</strong> – pour faute d'une particulière gravité rendant impossible le maintien du salarié.</span></li>
+          <li><span class="sanction-num">5.</span><span><strong>Licenciement pour faute lourde</strong> – pour faute intentionnelle causant un préjudice à l'entreprise.</span></li>
+        </ul>
+      </div>
+
+      <div class="article">
+        <h3>Article 23 – Fautes graves</h3>
+        <p>Constituent notamment des fautes graves pouvant entraîner un licenciement sans préavis ni indemnités :</p>
+        <ul>
+          <li>Vol, détournement de fonds ou escroquerie ;</li>
+          <li>Insubordination caractérisée ou refus d'exécuter les instructions de la Direction ;</li>
+          <li>Divulgation de secrets professionnels ou d'informations confidentielles ;</li>
+          <li>Harcèlement moral ou sexuel à l'encontre d'un collègue ou d'un client ;</li>
+          <li>Absence injustifiée de plus de <strong>trois (3) jours consécutifs</strong> ;</li>
+          <li>Dégradation volontaire du matériel ou des locaux de l'entreprise ;</li>
+          <li>Ivresse ou consommation de substances illicites sur le lieu de travail ;</li>
+          <li>Concurrence déloyale avérée.</li>
+        </ul>
+      </div>
+
+      <div class="article">
+        <h3>Article 24 – Procédure disciplinaire</h3>
+        <ol style="padding-left:20px; font-size:0.92rem;">
+          <li style="margin-bottom:6px;">Convocation de l'employé par écrit, avec mention des faits reprochés ;</li>
+          <li style="margin-bottom:6px;">Entretien contradictoire (l'employé peut se faire assister d'un collègue de son choix) ;</li>
+          <li style="margin-bottom:6px;">Notification écrite de la sanction, motivée, dans un délai maximum de <strong>15 jours</strong> suivant l'entretien ;</li>
+          <li>Possibilité pour le salarié de contester la décision devant l'<strong>Inspection du Travail</strong>.</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- CHAPITRE VI -->
+    <div class="section" id="ch6">
+      <div class="section-header">
+        <span class="chapter-num">Chapitre VI</span>
+        <h2>Droits des Employés</h2>
+      </div>
+
+      <div class="article">
+        <h3>Article 25 – Non-discrimination</h3>
+        <p>O'ClairVue SARL s'engage à respecter le principe d'égalité de traitement entre tous les employés, sans distinction de sexe, d'origine, de religion, d'opinion politique ou de situation de famille, conformément au Code du Travail malien.</p>
+      </div>
+
+      <div class="article">
+        <h3>Article 26 – Respect de la vie privée</h3>
+        <p>L'employeur s'engage à respecter la vie privée des employés. Aucune information personnelle ne sera divulguée sans le consentement de l'intéressé, à l'exception des obligations légales.</p>
+      </div>
+
+      <div class="article">
+        <h3>Article 27 – Rémunération</h3>
+        <p>Chaque employé perçoit une rémunération mensuelle fixée dans son contrat de travail, versée à terme échu.</p>
+      </div>
+
+      <div class="article">
+        <h3>Article 28 – Formation professionnelle</h3>
+        <p>O'ClairVue SARL encourage le développement des compétences de ses employés. Des formations pourront être proposées, notamment dans le domaine de l'optique et de la relation client, en fonction des besoins de l'entreprise et des opportunités disponibles.</p>
+      </div>
+
+      <div class="article">
+        <h3>Article 29 – Recours et réclamations</h3>
+        <p>Tout employé qui s'estime lésé dans ses droits peut saisir la Direction par écrit. En cas de non-résolution en interne, il peut recourir à l'<strong>Inspection du Travail</strong> compétente, conformément au Code du Travail malien.</p>
+      </div>
+    </div>
+
+    <!-- CHAPITRE VII -->
+    <div class="section" id="ch7">
+      <div class="section-header">
+        <span class="chapter-num">Chapitre VII</span>
+        <h2>Cessation du Contrat de Travail</h2>
+      </div>
+
+      <div class="article">
+        <h3>Article 30 – Démission</h3>
+        <p>En cas de démission, l'employé est tenu de respecter un préavis d'<strong>un (1) mois</strong>, notifié par écrit avec accusé de réception ou remise en main propre. Ce délai peut être réduit d'accord parties.</p>
+      </div>
+
+      <div class="article">
+        <h3>Article 31 – Licenciement</h3>
+        <p>En cas de licenciement, l'employeur respecte les procédures prévues par le Code du Travail malien, notamment en matière de préavis, d'entretien préalable et d'indemnités de licenciement, sauf cas de faute grave ou lourde.</p>
+      </div>
+
+      <div class="article">
+        <h3>Article 32 – Restitution du matériel</h3>
+        <p>À la cessation de ses fonctions, l'employé est tenu de restituer immédiatement l'ensemble des documents, matériels, équipements, badges et clés appartenant à O'ClairVue SARL. Le solde de tout compte ne sera établi qu'après vérification de cette restitution.</p>
+      </div>
+
+      <div class="article">
+        <h3>Article 33 – Obligation post-contractuelle</h3>
+        <p>L'obligation de confidentialité prévue à l'Article 12 demeure applicable après la cessation du contrat de travail, <strong>sans limitation de durée</strong> pour les informations sensibles de l'entreprise.</p>
+      </div>
+    </div>
+
+    <!-- CHAPITRE VIII -->
+    <div class="section" id="ch8">
+      <div class="section-header">
+        <span class="chapter-num">Chapitre VIII</span>
+        <h2>Dispositions Finales</h2>
+      </div>
+
+      <div class="article">
+        <h3>Article 34 – Entrée en vigueur</h3>
+        <p>Le présent Règlement Intérieur entre en vigueur à compter de la date de son dépôt auprès de la <strong>Direction Nationale du Travail du Mali</strong> et de son affichage dans les locaux de la société.</p>
+      </div>
+
+      <div class="article">
+        <h3>Article 35 – Hiérarchie des normes</h3>
+        <p>Pour tout ce qui n'est pas prévu par le présent Règlement Intérieur, les parties se réfèrent au <strong>Code du Travail de la République du Mali</strong>, à la <strong>Convention Collective Fédérale du Commerce</strong>, et aux contrats de travail individuels.</p>
+      </div>
+
+      <div class="article">
+        <h3>Article 36 – Clause de révision</h3>
+        <p>Le présent Règlement Intérieur pourra être révisé à tout moment, notamment en cas d'évolution de la législation applicable. Toute révision sera communiquée aux employés dans les formes prévues à l'Article 3.</p>
+      </div>
+    </div>
+
+    <!-- SIGNATURES -->
+    <div class="section" id="signatures">
+      <div class="section-header">
+        <span class="chapter-num">Signatures</span>
+        <h2>Fait à Bamako, le _______________ 2026</h2>
+      </div>
+
+      <div class="signature-block">
+        <h3>Signatures officielles</h3>
+        <div class="sig-row">
+          <div class="sig-col">
+            <div class="sig-name">Madame Fatoumata HAIDARA</div>
+            <div class="sig-title">Gérante – O'ClairVue SARL</div>
+            <div style="height:60px;"></div>
+            <div class="sig-line">Signature</div>
+          </div>
+          <div class="sig-col">
+            <div class="sig-name">Lu et approuvé par l'employé(e)</div>
+            <div class="sig-title">Nom &amp; Prénom : _________________________</div>
+            <div style="height:60px;"></div>
+            <div class="sig-line">Signature</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Accusé de réception -->
+      <div class="accuse">
+        <h3>📋 Accusé de réception du Règlement Intérieur</h3>
+        <p style="font-size:0.9rem;">Je soussigné(e),</p>
+        <div class="form-field">Nom &amp; Prénom : _______________________________________________________</div>
+        <div class="form-field">Qualité / Poste : _______________________________________________________</div>
+        <p style="font-size:0.9rem; margin-top:14px;">déclare avoir reçu, lu et compris le présent Règlement Intérieur en date du _______________ 2026.</p>
+        <p style="font-size:0.9rem; margin-top:6px;"><strong>Je m'engage à respecter l'ensemble des dispositions qui y sont contenues.</strong></p>
+        <div class="sig-row" style="margin-top:28px;">
+          <div class="sig-col">
+            <div style="height:50px;"></div>
+            <div class="sig-line">Signature de l'employé(e) <br><em style="font-size:0.75rem;">(précédée de la mention « Lu et Approuvé »)</em></div>
+          </div>
+          <div class="sig-col">
+            <div style="height:50px;"></div>
+            <div class="sig-line">Signature de la Direction</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p>O'ClairVue SARL &nbsp;·&nbsp; Kalaban Coura, Bamako, Mali &nbsp;·&nbsp; RCCM : MA.BKO.2025.B.9080</p>
+      <p style="margin-top:4px;">Règlement Intérieur – Version 1.0 – Avril 2026</p>
+    </footer>
+
+  </main>
+</div>
+
+<script>
+  // Highlight active nav link on scroll
+  const links = document.querySelectorAll('.sidebar a');
+  const sections = document.querySelectorAll('[id]');
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 80) current = s.id;
+    });
+    links.forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+  });
+
+  // Smooth scroll
+  links.forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+</script>
+
+</body>
+</html>
