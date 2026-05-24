@@ -5,7 +5,7 @@ const EMAILJS_TEMPLATE_ID = "template_2navahk";
 
 // ─── CONFIGURATION SUPABASE ──────────────────────────────────────────────────
 // Project Settings > API  →  Project URL  +  anon public key
-const SUPABASE_URL      = "https://supabase.com/dashboard/project/fowdgzimmoxawkxbisyp";   // ex: https://xxxx.supabase.co
+const SUPABASE_URL      = "https://fowdgzimmoxawkxbisyp.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZvd2RnemltbW94YXdreGJpc3lwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkzNjg2OTEsImV4cCI6MjA5NDk0NDY5MX0.BnOnt5i3bMU5Mx-724_kNPgI2vD_PWaAn0tp0KGuNOI";        // clé "anon public"
 // ─────────────────────────────────────────────────────────────────────────────
 
